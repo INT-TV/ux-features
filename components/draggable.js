@@ -8,13 +8,17 @@ class LikeButton extends React.Component {
     this.state = {held: false}
   }
 
+  transformStyle = {
+    backgroundColor: "blanchedalmond"
+  }
+
   handleClick = () => {
     this.setState({held: !this.state.held})
   }
 
   render() {
     return (
-      <div className="drag-item" onClick={this.handleClick}>
+      <div className="drag-item" onClick={this.handleClick} style={this.transformStyle}>
         <br /><br />
         {this.state.held ? "held" : "dropped"}
       </div>
