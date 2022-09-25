@@ -1,5 +1,5 @@
 body {
-  font-family: 'Inconsolata', monospace;
+  font-family: "Inconsolata", monospace;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,4 +16,12 @@ h1 {
   height: 25em;
   border-radius: 8px;
   margin: 0;
+}
+
+.drag-item {
+  width: 6em;
+  height: 6em;
+  background-color: blanchedalmond;
+  border-radius: 8px;
+  text-align: center;
 }
