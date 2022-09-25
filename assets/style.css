@@ -5,3 +5,15 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+h1 {
+  text-align: center;
+}
+
+#draggable {
+  background-color: gainsboro;
+  width: 40em;
+  height: 25em;
+  border-radius: 8px;
+  margin: 0;
+}

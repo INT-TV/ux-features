@@ -8,19 +8,19 @@ class LikeButton extends React.Component {
     this.state = { liked: false };
   }
 
-  render() {
-    if (this.state.liked) {
-      return 'You liked this.';
-    }
+  handleClick = () => {
+    this.setState({liked: !this.state.liked})
+  }
 
-    return e(
-      'button',
-      { onClick: () => this.setState({ liked: true }) },
-      'Like'
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.liked ? "liked" : "not liked"}
+      </button>
     );
   }
 }
 
-const domContainer = document.querySelector('#like_button_container');
+const domContainer = document.querySelector('#draggable');
 const root = ReactDOM.createRoot(domContainer);
 root.render(e(LikeButton));
