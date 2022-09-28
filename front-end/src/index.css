@@ -5,3 +5,10 @@
   align-items: center;
   font-family: 'Inconsolata', monospace;
 }
+
+.testing-container {
+  width: 50em;
+  height: 40em;
+  background-color: gainsboro;
+  border-radius: 8px;
+}
