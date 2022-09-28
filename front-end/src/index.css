@@ -1,5 +1,6 @@
 :root {
   --darkest: rgb(0, 0, 0);
+  --dark-secondary: gainsboro;
   --lightest: white;
   --main-highlight: #fff01f;
   background-color: var(--darkest);
@@ -21,11 +22,13 @@
   width: 50em;
   height: 40em;
   background-color: var(--lightest);
-  box-shadow: 30px 30px var(--main-highlight);
+  box-shadow: 5px 5px var(--main-highlight);
+  position: relative;
 }
 
 .draggable-container {
-  width: 100px;
-  height: 100px;
-  background-color: var(--lightest);
+  width: 15em;
+  height: 10em;
+  background-color: var(--dark-secondary);
+  position: absolute;
 }
