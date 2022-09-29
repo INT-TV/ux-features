@@ -15,19 +15,16 @@ export default function DragMove(props) {
 
   const handlePointerDown = (e) => {
     setIsDragging(true);
-
     onPointerDown(e);
   };
 
   const handlePointerUp = (e) => {
     setIsDragging(false);
-
     onPointerUp(e);
   };
 
   const handlePointerMove = (e) => {
     if (isDragging) onDragMove(e);
-
     onPointerMove(e);
   };
 

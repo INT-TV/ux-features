@@ -2,7 +2,7 @@ import { useState } from "react"
 import DragMove from "./DragMove"
 
 const Draggable = (props) => {
-  const { mouseX, mouseY } = props
+  const { children } = props
 
   const [translate, setTranslate] = useState({
     x: 0,
@@ -25,7 +25,7 @@ const Draggable = (props) => {
         }}
         onDragMove={handleDragMove}
       >
-        {mouseX} {mouseY}
+        {children}
       </div>
     </DragMove>
   )
