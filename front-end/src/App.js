@@ -1,6 +1,6 @@
 import React from "react"
 import DraggableContainer from "./components/DraggableContainer"
-import exampleVideos from './example/videos'
+import { exampleVideos } from './example/videos'
 
 function App() {
   return (
@@ -10,9 +10,9 @@ function App() {
         <DraggableContainer>
           <iframe
             src={exampleVideos.test}
-            frameborder="0"
+            frameBorder="0"
             allow="autoplay; encrypted-media"
-            allowfullscreen
+            allowFullScreen
             title="video"
           />
         </DraggableContainer>
