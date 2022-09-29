@@ -1,12 +1,7 @@
 import React from "react"
 import DraggableContainer from "./components/DraggableContainer"
-import { exampleVideos } from './example/videos'
-
-const iframeProps = {
-  frameBorder: '0',
-  allow: 'autoplay; encrypted-media',
-  title: 'video'
-}
+import YoutubeFrame from "./components/YoutubeFrame"
+import { exampleVideos } from "./example/videos"
 
 function App() {
   return (
@@ -14,31 +9,15 @@ function App() {
       <h1>INT.TV UX Designs</h1>
       <div className="testing-container">
         <DraggableContainer>
-          <iframe
-            src={exampleVideos.test}
-            frameBorder={iframeProps.frameBorder}
-            allow={iframeProps.allow}
-            allowFullScreen
-            title={iframeProps.title}
-          />
+          <YoutubeFrame src={exampleVideos.test} />
         </DraggableContainer>
+
         <DraggableContainer>
-          <iframe
-            src={exampleVideos.tiktoks}
-            frameBorder={iframeProps.frameBorder}
-            allow={iframeProps.allow}
-            allowFullScreen
-            title={iframeProps.title}
-          />
+          <YoutubeFrame src={exampleVideos.tiktoks} />
         </DraggableContainer>
+
         <DraggableContainer>
-          <iframe
-            src={exampleVideos.music}
-            frameBorder={iframeProps.frameBorder}
-            allow={iframeProps.allow}
-            allowFullScreen
-            title={iframeProps.title}
-          />
+          <YoutubeFrame src={exampleVideos.music} />
         </DraggableContainer>
       </div>
     </div>
