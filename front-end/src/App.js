@@ -9,15 +9,15 @@ function App() {
       <h1>INT.TV UX Designs</h1>
       <div className="testing-container">
         <DraggableContainer>
-          <YoutubeFrame src={exampleVideos.test} />
+          <YoutubeFrame src={exampleVideos[0]} />
         </DraggableContainer>
 
         <DraggableContainer>
-          <YoutubeFrame src={exampleVideos.tiktoks} />
+          <YoutubeFrame src={exampleVideos[1]} />
         </DraggableContainer>
 
         <DraggableContainer>
-          <YoutubeFrame src={exampleVideos.music} />
+          <YoutubeFrame src={exampleVideos[2]} />
         </DraggableContainer>
       </div>
     </div>
