@@ -1,8 +1,8 @@
 :root {
-  --darkest: rgb(0, 0, 0);
+  --darkest: #1A1A1C;
   --dark-secondary: gainsboro;
   --lightest: white;
-  --main-highlight: #fff01f;
+  --main-highlight: #00E6CB;
   background-color: var(--darkest);
 }
 

@@ -23,7 +23,6 @@ const Draggable = (props) => {
         style={{
           transform: `translateX(${translate.x}px) translateY(${translate.y}px)`,
         }}
-        onDragMove={handleDragMove}
       >
         {children}
       </div>

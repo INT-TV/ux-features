@@ -2,6 +2,7 @@ import React from "react"
 import DraggableContainer from "./components/DraggableContainer"
 import YoutubeFrame from "./components/YoutubeFrame"
 import { exampleVideos } from "./example/videos"
+import AnimatedLogo from "./components/AnimatedLogo"
 
 function App() {
   return (
@@ -9,17 +10,20 @@ function App() {
       <h1>INT.TV UX Designs</h1>
       <div className="testing-container">
         <DraggableContainer>
-          <YoutubeFrame src={exampleVideos[0]} />
+          <YoutubeFrame src={"#"} />
         </DraggableContainer>
 
         <DraggableContainer>
-          <YoutubeFrame src={exampleVideos[1]} />
+          <YoutubeFrame src={"#"} />
         </DraggableContainer>
 
         <DraggableContainer>
-          <YoutubeFrame src={exampleVideos[2]} />
+          <YoutubeFrame src={"#"} />
         </DraggableContainer>
       </div>
+
+      <br /><br />
+      <AnimatedLogo />
     </div>
   )
 }
