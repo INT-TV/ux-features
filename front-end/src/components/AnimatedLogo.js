@@ -2,16 +2,16 @@ import { useEffect, useState } from "react"
 
 const AnimatedLogo = () => {
   const [border, setBorder] = useState(0)
-  
+
   useEffect(() => {
     updateNum()
   }, [])
 
   const updateNum = () => {
-    setBorder(border => (border + 1) % 400)
+    setBorder((border) => (border + 1) % 400)
     setTimeout(() => {
       updateNum()
-    }, 10);
+    }, 10)
   }
 
   const containerStyle = {
@@ -31,18 +31,18 @@ const AnimatedLogo = () => {
   }
 
   const borderBoxStyle = {
-    position: 'absolute',
-    width: '50em',
-    height: '50em',
+    position: "absolute",
+    width: "50em",
+    height: "50em",
     border: `${border}px dashed #FFF`,
-    boxSizing: 'border-box',
-    overflow: 'hidden'
+    boxSizing: "border-box",
+    overflow: "hidden",
   }
 
   return (
     <>
       <h1>click to begin animation</h1>
-      <div style={containerStyle} onClick={updateNum}>
+      <div style={containerStyle}>
         <span style={borderBoxStyle} />
         <h1 style={logoStyle}>INT.TV</h1>
       </div>
