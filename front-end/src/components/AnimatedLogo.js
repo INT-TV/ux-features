@@ -2,6 +2,10 @@ import { useEffect, useState } from "react"
 
 const AnimatedLogo = () => {
   const [border, setBorder] = useState(0)
+  
+  useEffect(() => {
+    updateNum()
+  }, [])
 
   const updateNum = () => {
     setBorder(border => (border + 1) % 400)
