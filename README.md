@@ -22,3 +22,5 @@ Obviously, it's more complex than this in real life, but I use this simpler fram
 So I have these two goals I'm working with: show them the competition in its most brutal, and let them face it together.
 
 How can I make Twitch seem like a game, like a mission in a large RPG?
+
+Struggling with node in MacOS 10.13
