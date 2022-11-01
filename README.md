@@ -4,6 +4,11 @@
 
 Going to list off a few different designs I'm thinking of when it comes to managing different streams on one home-page. 
 
+## To do
+
+- [x] TypeScript API
+- [ ] TypeScript front end
+
 ### Goals
 
 The website needs to accomplish two goals: 
