@@ -26,7 +26,7 @@ const TWITCH_SECRET: TwitchConfig = validateEnv.parseTwitchConfig(
 const SESSION_SECRET: SessionSecret = validateEnv.parseSessionSecret(
   process.env.SESSION_SECRET
 );
-const CALLBACK_URL = "http://localhost:3000/auth/twitch/callback"; // You can run locally with - http://localhost:3000/auth/twitch/callback
+const CALLBACK_URL = "http://localhost:3001/auth/twitch/callback"; // You can run locally with - http://localhost:3000/auth/twitch/callback
 
 // Middlewares
 app.use(express.json());
