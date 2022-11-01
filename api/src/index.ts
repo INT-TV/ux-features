@@ -77,6 +77,16 @@ passport.use(
 
 app.use("/ping", testsRouter);
 
+app.get("/auth/twitch", passport.authenticate("twitch"));
+app.get(
+  "/auth/twitch/callback",
+  passport.authenticate("twitch", { failureRedirect: "/" }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    res.redirect("/");
+  }
+);
+
 app.listen(PORT, () => {
   console.log(`app running on port: ${PORT}`);
 });
