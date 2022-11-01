@@ -8,6 +8,8 @@ import cookieSession from "cookie-session";
 import passport from "passport";
 import twitchPassport from "passport-twitch-latest";
 import testsRouter from "./routes/testsRouter";
+import { SessionSecret, TwitchConfig } from "./utils/types";
+import validateEnv from "./utils/validateProcessEnv";
 
 dotenv.config();
 const twitchStrategy = twitchPassport.Strategy;
@@ -15,9 +17,15 @@ const app = express();
 const PORT = process.env.PORT;
 
 // Define our constants, you will change these with your own
-const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
-const TWITCH_SECRET = process.env.TWITCH_SECRET;
-const SESSION_SECRET = process.env.SESSION_SECRET;
+const TWITCH_CLIENT_ID: TwitchConfig = validateEnv.parseTwitchConfig(
+  process.env.TWITCH_CLIENT_ID
+);
+const TWITCH_SECRET: TwitchConfig = validateEnv.parseTwitchConfig(
+  process.env.TWITCH_SECRET
+);
+const SESSION_SECRET: SessionSecret = validateEnv.parseSessionSecret(
+  process.env.SESSION_SECRET
+);
 const CALLBACK_URL = "http://localhost:3000/auth/twitch/callback"; // You can run locally with - http://localhost:3000/auth/twitch/callback
 
 // Middlewares
@@ -41,7 +49,12 @@ passport.use(
       callbackURL: CALLBACK_URL,
       scope: "user_read",
     },
-    function (accessToken: unknown, refreshToken: unknown, profile: unknown, done: unknown) {
+    function (
+      accessToken: unknown,
+      refreshToken: unknown,
+      profile: unknown,
+      done: unknown
+    ) {
       console.log("passport accessing");
       console.log(
         `accessToken: ${accessToken} refresh: ${refreshToken} profile: ${profile} done: ${done}`
