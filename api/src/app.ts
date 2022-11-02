@@ -1,10 +1,10 @@
-import { SESSION_SECRET } from './utils/config';
+import { SESSION_SECRET } from "./utils/config";
 import express from "express";
 import session from "express-session";
 import cors from "cors";
 import bodyParser from "body-parser";
 import testsRouter from "./routes/testsRouter";
-import { requestLogger } from './utils/middleware';
+import { requestLogger } from "./utils/middleware";
 
 const app = express();
 
