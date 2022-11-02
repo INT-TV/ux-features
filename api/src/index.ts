@@ -1,5 +1,10 @@
 import express from "express";
 import session from "express-session";
+declare module 'express-session' {
+  interface Session {
+    userId: string;
+  }
+}
 import cors from "cors";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
@@ -10,6 +15,7 @@ import twitchPassport from "passport-twitch-latest";
 import testsRouter from "./routes/testsRouter";
 import { SessionSecret, TwitchConfig } from "./utils/types";
 import validateEnv from "./utils/validateProcessEnv";
+
 
 dotenv.config();
 const twitchStrategy = twitchPassport.Strategy;
@@ -55,7 +61,7 @@ passport.use(
       profile: unknown,
       done: unknown
     ) {
-      console.log("passport accessing");
+      console.log("passport function callback");
       console.log(
         `accessToken: ${accessToken} refresh: ${refreshToken} profile: ${profile} done: ${done}`
       );
