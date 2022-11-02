@@ -77,7 +77,6 @@ passport.use(
 // });
 
 app.use("/ping", testsRouter);
-
 app.get("/auth/twitch", passport.authenticate("twitch"));
 app.get(
   "/auth/twitch/callback",
