@@ -1,6 +1,6 @@
 import express from "express";
 import session from "express-session";
-declare module 'express-session' {
+declare module "express-session" {
   interface Session {
     userId: string;
   }
@@ -8,14 +8,11 @@ declare module 'express-session' {
 import cors from "cors";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";
-import cookieSession from "cookie-session";
 import passport from "passport";
 import twitchPassport from "passport-twitch-latest";
 import testsRouter from "./routes/testsRouter";
 import { SessionSecret, TwitchConfig } from "./utils/types";
 import validateEnv from "./utils/validateProcessEnv";
-
 
 dotenv.config();
 const twitchStrategy = twitchPassport.Strategy;
@@ -41,8 +38,6 @@ app.use(
   session({ secret: SESSION_SECRET, resave: false, saveUninitialized: false })
 );
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(cookieSession({ secret: "somesecrettokenhere" }));
 app.use(passport.initialize());
 app.use(express.static("./public"));
 
