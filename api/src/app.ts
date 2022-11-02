@@ -20,8 +20,4 @@ app.use(express.static("./public"));
 // routes
 app.use("/ping", testsRouter);
 
-app.listen(PORT, () => {
-  console.log(`app running on port: ${PORT}`);
-});
-
 export default app;
