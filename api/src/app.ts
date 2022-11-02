@@ -4,11 +4,11 @@ import session from "express-session";
 import cors from "cors";
 import bodyParser from "body-parser";
 import testsRouter from "./routes/testsRouter";
+import { requestLogger } from './utils/middleware';
 
 const app = express();
-const PORT = process.env.PORT;
 
-// Middlewares
+// middleware
 app.use(express.json());
 app.use(cors());
 app.use(
@@ -16,6 +16,7 @@ app.use(
 );
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("./public"));
+app.use(requestLogger);
 
 // routes
 app.use("/ping", testsRouter);
