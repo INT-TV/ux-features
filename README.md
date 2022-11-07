@@ -15,17 +15,9 @@ The website needs to accomplish two goals:
  - show new streamers what they don't know they need to know
  - connect new streamers to each other
 
-I chose these two goals because they directly translate to quantifiable features on the main user interface, and because they align with the project mission. 
+### Challenges
+The left shift key on my laptop is broken, thank you Apple. I learned a lot about how to authenticate requests to a protected resource via OAuth2 protocol. It seems like a lot of back and forth, you have to essentially get the auth token from the resource owner, then send it alongside the request for the resource, then you get to parse the data. Each of these steps can likely be handled with some library, and in the demo code the TWitch API has linked the author uses the Passport library -- I cannot get it to work.
 
-*Story Time*
-My friends are like me, people who play video games socially and because we're a little competetive, so we don't really watch streamers. To us, video games are a hobby and social event, something we can build a little extra social time into while feeling like we're getting better at something. To younger generations (and us when we were younger) games were the _core_ of that social interaction, not just the thing we used as an excuse to hang out.
+Instead I found a github repo of a website that uses the Twitch API, nobody.live, and saw the author manually setup the auth in his Python scraper, so I figured I'd do the same with my little Node project.
 
-Streamers on Twitch fill a bit of that gap for younger generations. Kids these days are finding social interaction online _primarily_, while gaming can take a back seat. They can be competetive in other ways, they just need something to talk about and fill blank space with. Streamers are big personalities that everyone knows about, it's a microcosm of "regular" non-online traditional celebrity.
-
-Obviously, it's more complex than this in real life, but I use this simpler framework of online interaction in the younger generation as context for INT.TV. The app is meant to run alongside these ideas -- of social interaction and competition -- by placing them next to each other, rather than on opposite ends of a spectrum. The goal is to get the shared interest that a group of people have and use it as a snare to get them in the same chat room. It's supposed to be authentic because it doesn't catch people who aren't in that scene.
-
-So I have these two goals I'm working with: show them the competition in its most brutal, and let them face it together.
-
-How can I make Twitch seem like a game, like a mission in a large RPG?
-
-Struggling with node in MacOS 10.13
+This could be useful demo code for somebody down the line, or may be a waste of my time and I should just figure out Passport.
