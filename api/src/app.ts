@@ -19,7 +19,7 @@ passport.use(
     {
       clientID: TWITCH_CLIENT_ID,
       clientSecret: TWITCH_SECRET,
-      callbackURL: "http://127.0.0.1:300/auth/twitchtv/callback",
+      callbackURL: "http://localhost:3001/auth/twitchtv/callback",
       scope: "user_read",
     },
     function (accessToken, refreshToken, profile, done) {
