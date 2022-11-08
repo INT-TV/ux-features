@@ -60,15 +60,15 @@ app.use("/ping", testsRouter);
 
 // twitch passport routing
 app.get("/", function (req, res) {
-  res.render("index", { user: req.user });
+  res.send(`user: ${req.user}`);
 });
 
 app.get("/account", ensureAuthenticated, function (req, res) {
-  res.render("account", { user: req.user });
+  res.send(`account: ${req.user}`);
 });
 
 app.get("/login", function (req, res) {
-  res.render("login", { user: req.user });
+  res.send(`login page for: ${req.user}`);
 });
 
 app.get(
@@ -89,10 +89,12 @@ app.get(
   }
 );
 
-app.post('/logout', function(req, res, next) {
-  req.logout(function(err) {
-    if (err) { return next(err); }
-    res.redirect('/');
+app.post("/logout", function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
   });
 });
 
