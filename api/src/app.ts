@@ -13,7 +13,7 @@ import {
 } from "./utils/config";
 
 // passport config TODO: refactor to middleware
-const TwitchtvStrategy = twitchPassport.Strategy();
+const TwitchtvStrategy = twitchPassport.Strategy;
 passport.use(
   new TwitchtvStrategy(
     {
