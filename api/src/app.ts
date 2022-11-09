@@ -21,16 +21,16 @@ passport.deserializeUser(function (obj: false | null, done) {
 passport.use(
   new Strategy(
     {
-      clientID: "abcdefghijklmnopqrstuvwxyz",
-      clientSecret: "abcdefghijklmnopqrstuvwxyz",
-      callbackURL: "http://localhost:8080/auth/twitch/callback",
+      clientID: TWITCH_CLIENT_ID,
+      clientSecret: TWITCH_SECRET,
+      callbackURL: "http://localhost:3000/auth/twitch/callback",
 
       /* Optional settings: */
       scope: [Scope.USER_READ_EMAIL],
     },
     // TODO: done should be VerifyCallback<ExampleUser>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (accessToken: string, refreshToken: string, profile: Profile, done: any) => {
+    (accessToken: string, refreshToken: string, profile: Profile, done: VerifyCallback) => {
       console.log(`succesfully received accessToken: ${accessToken}, refresh: ${refreshToken}, profile: ${profile}`)
 
       done(null, profile)
@@ -42,7 +42,7 @@ passport.use(
 const app = express()
 app.use(express.json())
 app.use(session({
-  secret: "abcdefghijklmnopqrstuvwxyz",
+  secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: new MemoryStore(),
