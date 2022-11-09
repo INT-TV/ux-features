@@ -1,3 +1,3 @@
-export type SessionSecret = string | string[];
+export type SessionSecret = string | string[]
 
-export type TwitchConfig = string;
+export type TwitchConfig = string
