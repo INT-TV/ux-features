@@ -14,7 +14,9 @@ passport.serializeUser(function (user, done) {
   done(null, user)
 })
 
-passport.deserializeUser(function (obj: false | null, done) {
+// TODO: proper deserialization
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+passport.deserializeUser(function (obj: any, done) {
   done(null, obj)
 })
 
@@ -24,9 +26,7 @@ passport.use(
       clientID: TWITCH_CLIENT_ID,
       clientSecret: TWITCH_SECRET,
       callbackURL: "http://localhost:3000/auth/twitch/callback",
-
-      /* Optional settings: */
-      scope: [Scope.USER_READ_EMAIL],
+      scope: "user_read",
     },
     // TODO: done should be VerifyCallback<ExampleUser>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
