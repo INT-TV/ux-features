@@ -1,108 +1,99 @@
-import express from "express";
-import session from "express-session";
-import cors from "cors";
-import bodyParser from "body-parser";
-import testsRouter from "./routes/testsRouter";
-import passport from "passport";
-import twitchPassport from "passport-twitchtv";
-import { requestLogger } from "./utils/middleware";
-import {
-  SESSION_SECRET,
-  TWITCH_CLIENT_ID,
-  TWITCH_SECRET,
-} from "./utils/config";
+import express from "express"
+import session, { MemoryStore } from "express-session"
+import cors from "cors"
+import bodyParser from "body-parser"
+import passport from "passport"
+import testsRouter from "./routes/testsRouter"
+import { Profile, Scope, Strategy, VerifyCallback } from "@oauth-everything/passport-twitch"
+import { requestLogger } from "./utils/middleware"
+import { SESSION_SECRET, TWITCH_CLIENT_ID, TWITCH_SECRET } from "./utils/config"
 
-// passport config TODO: refactor to middleware
-const TwitchtvStrategy = twitchPassport.Strategy;
-passport.use(
-  new TwitchtvStrategy(
-    {
-      clientID: TWITCH_CLIENT_ID,
-      clientSecret: TWITCH_SECRET,
-      callbackURL: "http://localhost:3000/auth/twitchtv/callback",
-      scope: "user_read",
-    },
-    function (accessToken, refreshToken, profile, done) {
-      console.log(profile);
-      return done(null, profile);
-      // process.nextTick(function () {
-      //   return done(null, profile);
-      // });
-    }
-  )
-);
-
+// passport config
+// TODO: serialization needs interfaces
 passport.serializeUser(function (user, done) {
-  done(null, user);
-});
+  done(null, user)
+})
 
 passport.deserializeUser(function (obj: false | null, done) {
-  done(null, obj);
-});
+  done(null, obj)
+})
 
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/login");
-}
+passport.use(
+  new Strategy(
+    {
+      clientID: "abcdefghijklmnopqrstuvwxyz",
+      clientSecret: "abcdefghijklmnopqrstuvwxyz",
+      callbackURL: "http://localhost:8080/auth/twitch/callback",
+
+      /* Optional settings: */
+      scope: [Scope.USER_READ_EMAIL],
+    },
+    // TODO: done should be VerifyCallback<ExampleUser>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (accessToken: string, refreshToken: string, profile: Profile, done: any) => {
+      console.log(`succesfully received accessToken: ${accessToken}, refresh: ${refreshToken}, profile: ${profile}`)
+
+      done(null, profile)
+    }
+  )
+)
 
 // middleware
-const app = express();
-app.use(express.json());
-app.use(cors());
-app.use(
-  session({ secret: SESSION_SECRET, resave: false, saveUninitialized: false })
-);
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("./public"));
-app.use(requestLogger);
-app.use(passport.initialize());
-app.use(passport.session());
+const app = express()
+app.use(express.json())
+app.use(session({
+  secret: "abcdefghijklmnopqrstuvwxyz",
+  resave: false,
+  saveUninitialized: false,
+  store: new MemoryStore(),
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(cors())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.static("./public"))
+app.use(requestLogger)
 
 // routes
-app.use("/ping", testsRouter);
+app.use("/ping", testsRouter)
+
+app.post('/logout', (req, res, next) => {
+    req.logout(err => {
+        if (err) return next(err)
+        res.redirect('/')
+    })
+})
 
 // twitch passport routing
-app.get("/", function (req, res) {
-  res.send(`user: ${req.user}`);
-});
+app.get("/auth/twitch", passport.authenticate("twitch"))
 
-app.get("/account", ensureAuthenticated, function (req, res) {
-  res.send(`account: ${req.user}`);
-});
-
-app.get("/login", function (req, res) {
-  res.send(`login page for: ${req.user}`);
-});
-
-app.get(
-  "/auth/twitchtv",
-  passport.authenticate("twitchtv", { scope: ["user_read"] }),
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  function (_req, _res) {
-    // The request will be redirected to Twitch.tv for authentication, so this
-    // function will not be called.
-  }
-);
-
-app.get(
-  "/auth/twitchtv/callback",
-  passport.authenticate("twitchtv", {
+app.get("/auth/twitch/callback", passport.authenticate("twitch", {
     failureRedirect: "/login",
-  }),
-  function (req, res) {
-    res.redirect("/");
+    successRedirect: "/"
+}))
+
+// TODO: route to front-end
+app.get("/", (req, res) => {
+  if (req.isAuthenticated()) {
+      // User is logged in
+      res
+          .status(200)
+          .header('Content-Type', 'text/html')
+          .send(`
+              <h2>Welcome ${req.user}!</h2>
+              <p><code>req.user<code>:</p>
+              <pre>${JSON.stringify(req.user)}</pre>
+              <form action="/logout" method="post"><input type="submit" value="Logout"></form>
+          `)
+  } else {
+      // User is not logged in
+      res
+          .status(200)
+          .header('Content-Type', 'text/html')
+          .send(`
+              <a href="/auth/twitch">Login with your Twitch account</a>
+          `)
   }
-);
+})
 
-app.post("/logout", function (req, res, next) {
-  req.logout(function (err) {
-    if (err) {
-      return next(err);
-    }
-    res.redirect("/");
-  });
-});
-
-export default app;
+export default app
