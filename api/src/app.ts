@@ -26,7 +26,6 @@ passport.use(
       clientID: TWITCH_CLIENT_ID,
       clientSecret: TWITCH_SECRET,
       callbackURL: "http://localhost:3000/auth/twitch/callback",
-      scope: "user_read",
     },
     // TODO: done should be VerifyCallback<ExampleUser>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
