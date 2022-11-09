@@ -19,21 +19,26 @@ passport.use(
     {
       clientID: TWITCH_CLIENT_ID,
       clientSecret: TWITCH_SECRET,
-      callbackURL: "http://localhost:3001/auth/twitchtv/callback",
+      callbackURL: "http://localhost:3000/auth/twitchtv/callback",
       scope: "user_read",
     },
     function (accessToken, refreshToken, profile, done) {
-      // asynchronous verification, for effect...
-      process.nextTick(function () {
-        // To keep the example simple, the user's Twitch.tv profile is returned to
-        // represent the logged-in user.  In a typical application, you would want
-        // to associate the Twitch.tv account with a user record in your database,
-        // and return that user instead.
-        return done(null, profile);
-      });
+      console.log(profile);
+      return done(null, profile);
+      // process.nextTick(function () {
+      //   return done(null, profile);
+      // });
     }
   )
 );
+
+passport.serializeUser(function (user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function (obj: false | null, done) {
+  done(null, obj);
+});
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
@@ -83,7 +88,9 @@ app.get(
 
 app.get(
   "/auth/twitchtv/callback",
-  passport.authenticate("twitchtv", { failureRedirect: "/login" }),
+  passport.authenticate("twitchtv", {
+    failureRedirect: "/login",
+  }),
   function (req, res) {
     res.redirect("/");
   }
