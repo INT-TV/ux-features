@@ -23,6 +23,8 @@ Instead I found a github repo of a website that uses the Twitch API, nobody.live
 This could be useful demo code for somebody down the line, or may be a waste of my time and I should just figure out Passport.
 
 #### Authorization
-I've spent longer than I'd like to admit trying to read data from Twitch's API, though I think I've found the best support yet using the twitch strategy for passport via oauth-everything. That being said, in this case I might just not need it. I've been succesful getting an app authorization token via Postman using my application credentials, so I know that what they explain in their documentation works, but I'm hesitant to try and implement it on the backend without the confidence of a well-maintained library.
+I'm still working on authenticating requests to Twitch's API's. It's taken awhile to understand the back and forth OAuth2 flow(s) but I'm slowly piecing it together. My goal currently has beeen to redirect the user to the appropriate login page, then read the user data back to the server. This would allow me to then create a database of users and store their info there, but I haven't even been able to actually connect the app to Twitch's API successfully. 
 
-Going to keep reading up on passport and twitch docs, at the very least finding good code means I'm slowly understanding it more and more.
+This speaks to a larger issue, unfortunately, and the question of _so what then_ still remains. There's no reason to read the user's Twitch account data other than to prove I can, and because I haven't targetted any endpoints specifically it's hard to reference specific documentation. Twitch's API's are large and complex, I need to be more planned out before going in there.
+
+My next step is to go back to the drawing board, and make sure my designs are super clear. This will help me choose specific endpoints to grab from, and I can test things out in Postman before coding it in -- hopefully one day I can actually figure out passport.
